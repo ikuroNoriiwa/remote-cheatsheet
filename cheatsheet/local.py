@@ -1,6 +1,6 @@
 from typing import Optional, List
 import typer 
-import wiki_cheatsheet
+from . import wiki_cheatsheet
 
 app = typer.Typer()
 

@@ -1,9 +1,15 @@
 from lib2to3.pgen2 import token
 from os.path import exists, join
 from os import getenv, makedirs
+from platform import system
 import sqlite3
 
-DEFAULT_CONFIG_PATH = r"{}\.wiki-cheatsheet".format(getenv("HOMEPATH"))
+if system() is "Windows":
+    DEFAULT_CONFIG_PATH = r"{}\.wiki-cheatsheet".format(getenv("HOMEPATH"))
+elif system() is "Linux":
+    DEFAULT_CONFIG_PATH = r"{}/.wiki-cheatsheet".format(getenv("HOME"))
+else:
+    DEFAULT_CONFIG_PATH = r"{}/.wiki-cheatsheet".format(getenv("HOME"))
 
 def init_config(self, config_path=DEFAULT_CONFIG_PATH, token=None): 
     print(config_path)
@@ -16,6 +22,10 @@ def init_config(self, config_path=DEFAULT_CONFIG_PATH, token=None):
             self.write_token("xxxx.yyyyy.zzzzz")
         else: 
             self.write_token(token)
+
+        print("Create config database")
+        self.init_local_db()
+        print("Done")
 
 def get_config_path(self): 
     return DEFAULT_CONFIG_PATH

@@ -72,3 +72,31 @@ def get_page_id_by_tags(self, tags:list):
         lst_tag = []
     
     return lst_tag
+
+
+def get_all_pages(self):
+    query = gql(
+        """
+        query {
+            pages{
+                list{
+                    title,
+                    description, 
+                    id, 
+                    path, 
+                    tags
+                }
+            }
+        }
+        """
+    )
+
+    result, err = self.query_graphql(query)
+
+    if result is not None:
+        lst_tag = result['pages']['list']
+
+    else:
+        lst_tag = []
+
+    return lst_tag

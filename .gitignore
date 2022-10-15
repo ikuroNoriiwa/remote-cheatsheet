@@ -1,6 +1,7 @@
 .venv/
 .vscode/
+.idea/
 */__pycache__/
 *.pyc
 cheatsheet/wiki_cheatsheet/__pycache__/
-cheatsheet/cli/__pycache__/
+cheatsheet/sub_cli/__pycache__/

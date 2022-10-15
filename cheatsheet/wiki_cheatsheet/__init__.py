@@ -1,4 +1,4 @@
-from gql import gql, Client
+from gql import Client
 from gql.transport.aiohttp import AIOHTTPTransport
 
 __app_name__ = "wiki-cheatsheet"
@@ -36,7 +36,8 @@ class cheatsheet:
     from .pages import (
         retrieve_page_by_id,
         get_page_id_by_tags,
-        save_cheatsheet, 
+        save_cheatsheet,
+        get_all_pages
     )
 
     from .local_actions import (
@@ -46,3 +47,4 @@ class cheatsheet:
     from .sqlite_cheatsheet import (
         insert_tag
     )
+

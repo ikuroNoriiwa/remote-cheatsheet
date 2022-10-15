@@ -1,13 +1,14 @@
-from threading import local
-from typing import Optional, List
+from typing import Optional
 import typer 
-import wiki_cheatsheet
-from cli.remote import app as remote_app 
-from cli.local import app as local_app 
+from . import wiki_cheatsheet
+from .remote import app as remote_app
+from .local import app as local_app
+from .config import app as config_app
 
 app = typer.Typer()
-app.add_typer(remote_app, name="remote")
-app.add_typer(local_app, name="local")
+app.add_typer(remote_app, name="remote", help="Connect remote Host")
+app.add_typer(local_app, name="local", help="Manage local cheatsheets")
+app.add_typer(config_app, name="config", help="Configure app settings")
 
 def _version_callback(value:bool) -> None: 
     if value:
