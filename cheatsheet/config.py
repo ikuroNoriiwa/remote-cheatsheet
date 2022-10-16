@@ -30,3 +30,11 @@ def init_config(token: str):
     cs = wiki_cheatsheet.cheatsheet()
     cs.init_config(token=token)
     typer.echo("Your token is now set")
+
+@app.command()
+def init_db():
+    """
+    init local database
+    """
+    cs = wiki_cheatsheet.cheatsheet()
+    cs.init_local_db()
