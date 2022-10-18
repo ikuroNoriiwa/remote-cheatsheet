@@ -45,6 +45,10 @@ class cheatsheet:
     )
 
     from .sqlite_cheatsheet import (
-        insert_tag
+        insert_tag,
+        insert_cheatsheet,
+        insert_link_tag_cheatsheet,
+        insert_all,
+        search_cheatsheet_by_tag
     )
 

@@ -1,3 +1,4 @@
 aiohttp
-gql
-typer
+gql~=3.4.0
+typer~=0.6.1
+rich~=12.6.0

@@ -12,7 +12,11 @@ def retrieve_page_by_id(self, id:int):
                     title,
                     description, 
                     content, 
-                    tags, 
+                    tags{
+                        id,
+                        tag,
+                        title,
+                    }, 
                     hash 
                 
                 }
@@ -30,14 +34,18 @@ def retrieve_page_by_id(self, id:int):
         title = result['pages']['single']['title']
         description = result['pages']['single']['description']
         content = result['pages']['single']['content']
+        tag = result['pages']['single']['tags']
+        hash = result['pages']['single']['hash']
         err = None
 
     except (KeyError, TypeError): 
         title = None
         description = None
         content = None
+        tag = None
+        hash = None
 
-    return title, description, content, err 
+    return title, description, content, tag, hash, err
 
 def save_cheatsheet(self, title, description, content): 
     filename = title.replace(" ", "_") + ".md"

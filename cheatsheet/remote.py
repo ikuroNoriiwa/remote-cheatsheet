@@ -1,21 +1,24 @@
 from typing import Optional, List
-import typer 
+import typer
 from . import wiki_cheatsheet
 from rich.console import Console
 from rich.table import Table
+from rich.progress import track
+
 
 app = typer.Typer()
 
+
 @app.command()
 def list_tags():
-
     cs = wiki_cheatsheet.cheatsheet()
     tags = cs.get_tag_list()
-    for tag in tags: 
+    for tag in tags:
         print(tag)
 
+
 @app.command()
-def search_page_by_tag(tags:List[str]):
+def search_page_by_tag(tags: List[str]):
     cs = wiki_cheatsheet.cheatsheet()
     lst_page = []
     for tag in tags:
@@ -32,6 +35,7 @@ def search_page_by_tag(tags:List[str]):
             table.add_row(str(page['id']), page["title"], page["description"], page["path"])
     console = Console()
     console.print(table)
+
 
 @app.command()
 def list_all():
@@ -51,12 +55,29 @@ def list_all():
 
 
 @app.command()
-def download(cheatsheet_id:int):
+def download(cheatsheet_id: int):
     cs = wiki_cheatsheet.cheatsheet()
-    title, description, content, err = cs.retrieve_page_by_id(cheatsheet_id)
+    title, description, content, tag, hash_file, err = cs.retrieve_page_by_id(cheatsheet_id)
     cs.save_cheatsheet(title, description, content)
-    
 
 
+@app.command()
+def download_all():
+    cs = wiki_cheatsheet.cheatsheet()
+    pages = cs.get_all_pages()
+    max_page = len(pages)
+
+    current = 0
+    for value in track(pages, description="Downloading pages ..."):
+        title, description, content, tag, hash_file, err = cs.retrieve_page_by_id(value['id'])
+        cs.save_cheatsheet(title, description, content)
+        cs.insert_all(value['id'], hash_file, title, title, description, tag)
+        current += 1
+
+    print(f"Downloaded {current} pages on {max_page}")
 
 
+@app.command()
+def test():
+    cs = wiki_cheatsheet.cheatsheet()
+    cs.search_cheatsheet_by_tag(8)
