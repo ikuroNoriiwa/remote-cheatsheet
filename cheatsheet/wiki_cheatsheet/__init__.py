@@ -41,7 +41,8 @@ class cheatsheet:
     )
 
     from .local_actions import (
-        list_downloaded_cheatsheets
+        list_downloaded_cheatsheets,
+        read_single_page_by_id,
     )
 
     from .sqlite_cheatsheet import (
@@ -49,6 +50,8 @@ class cheatsheet:
         insert_cheatsheet,
         insert_link_tag_cheatsheet,
         insert_all,
-        search_cheatsheet_by_tag
+        search_cheatsheet_by_tag,
+        check_local_id,
+        get_local_cheatsheet_info_by_id,
     )
 

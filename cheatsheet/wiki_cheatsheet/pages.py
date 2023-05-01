@@ -1,7 +1,7 @@
 from typing import Type
 from gql import gql
 from gql.transport.exceptions import TransportQueryError
-from os.path import join 
+from os.path import join
 
 def retrieve_page_by_id(self, id:int):
     query = gql(
@@ -51,6 +51,8 @@ def save_cheatsheet(self, title, description, content):
     filename = title.replace(" ", "_") + ".md"
     with open(join(self.cheatsheet_path, filename), 'w') as cheatsheet: 
         cheatsheet.write(content)
+
+
 
 def get_page_id_by_tags(self, tags:list): 
     query = gql(

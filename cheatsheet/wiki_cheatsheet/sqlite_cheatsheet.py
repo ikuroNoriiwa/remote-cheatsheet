@@ -56,3 +56,27 @@ def search_cheatsheet_by_tag(self, tag_id=-1, tag_name=None):
             print(other_row)
 
         con.close()
+
+def get_local_cheatsheet_info_by_id(self, cheatsheet_id=None):
+    con = sqlite3.connect(self.db_config_path)
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM cheatsheets WHERE cheatsheet_id={}".format(cheatsheet_id))
+    row = cur.fetchall()
+
+    if len(row) > 0:
+        return row
+def check_local_id(self, cheatsheet_id=None):
+    cheatsheet_id = int(cheatsheet_id)
+    if isinstance(cheatsheet_id, int):
+        con = sqlite3.connect(self.db_config_path)
+        cur = con.cursor()
+
+        cur.execute("SELECT * FROM cheatsheets WHERE cheatsheet_id={}".format(cheatsheet_id))
+        row = cur.fetchall()
+        if len(row) > 0:
+            return True
+        else:
+            return False
+
+    return False
