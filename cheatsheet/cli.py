@@ -5,7 +5,7 @@ from .remote import app as remote_app
 from .local import app as local_app
 from .config import app as config_app
 
-app = typer.Typer()
+app = typer.Typer(no_args_is_help=True, context_settings={"help_option_names": ["-h", "--help"]})
 app.add_typer(remote_app, name="remote", help="Connect remote Host")
 app.add_typer(local_app, name="local", help="Manage local cheatsheets")
 app.add_typer(config_app, name="config", help="Configure app settings")

@@ -2,7 +2,7 @@ from gql import Client
 from gql.transport.aiohttp import AIOHTTPTransport
 
 __app_name__ = "wiki-cheatsheet"
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 
 class cheatsheet: 
     def __init__(self): 
@@ -12,7 +12,7 @@ class cheatsheet:
         self.config_path = self.get_config_path()
         self.cheatsheet_path = self.get_cheatsheet_path()
         self.db_config_path = self.get_db_config_path()
-        self.transport = AIOHTTPTransport(url=self.url, headers=self.headers)
+        self.transport = AIOHTTPTransport(url=self.url, headers=self.headers, client_session_args={"trust_env": True})
         self.client = Client(transport=self.transport, fetch_schema_from_transport=True)
 
     from .config import (
@@ -53,5 +53,6 @@ class cheatsheet:
         search_cheatsheet_by_tag,
         check_local_id,
         get_local_cheatsheet_info_by_id,
+        list_all_local_cheatsheets,
     )
 
