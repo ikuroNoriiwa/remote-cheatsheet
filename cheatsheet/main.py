@@ -15,6 +15,7 @@ if __name__ == "__main__":
     #print(content)
     #cs.get_page_id_by_tags(["enum"])
     #cs.init_config()
-    cs.init_local_db()
-    cs.simulate_data()
+    #cs.init_local_db()
+    #cs.simulate_data()
+    cs.search_term_in_name("f")
 

@@ -55,5 +55,8 @@ class cheatsheet:
         check_local_id,
         get_local_cheatsheet_info_by_id,
         list_all_local_cheatsheets,
+        search_term_in_name,
+        search_term_in_description,
+        
     )
 

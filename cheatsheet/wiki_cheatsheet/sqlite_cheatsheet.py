@@ -60,25 +60,26 @@ def search_cheatsheet_by_tag(self, tag_id=-1, tag_name=None):
 
 def list_all_local_cheatsheets(self): 
     con = sqlite3.connect(self.db_config_path)
+    con.row_factory = sqlite3.Row
     cur = con.cursor()
 
     cur.execute("SELECT * FROM cheatsheets")
-    row = cur.fetchall()
-    
-    if len(row) > 0:
-        return row
-    else: 
-        return []
+    #row = cur.fetchall()
+    return [dict(row) for row in cur.fetchall()] 
+    # if len(row) > 0:
+    #     return row
+    # else: 
+    #     return []
 
 def get_local_cheatsheet_info_by_id(self, cheatsheet_id=None):
     con = sqlite3.connect(self.db_config_path)
+    con.row_factory = sqlite3.Row
     cur = con.cursor()
 
     cur.execute("SELECT * FROM cheatsheets WHERE cheatsheet_id={}".format(cheatsheet_id))
-    row = cur.fetchall()
+    #row = cur.fetchall()
 
-    if len(row) > 0:
-        return row
+    return  [dict(row) for row in cur.fetchall()][0]
     
 
 def check_local_id(self, cheatsheet_id=None):
@@ -95,3 +96,25 @@ def check_local_id(self, cheatsheet_id=None):
             return False
 
     return False
+
+def search_term_in_name(self, term:str=None): 
+    if term is None: 
+        return []
+    else: 
+        con = sqlite3.connect(self.db_config_path)
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+
+        cur.execute("SELECT cheatsheet_id FROM cheatsheets WHERE title LIKE '%{}%'".format(term))
+        return [dict(row) for row in cur.fetchall()]
+    
+def search_term_in_description(self, term:str=None): 
+    if term is None: 
+        return []
+    else: 
+        con = sqlite3.connect(self.db_config_path)
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+
+        cur.execute("SELECT cheatsheet_id FROM cheatsheets WHERE description LIKE '%{}%'".format(term))
+        return [dict(row) for row in cur.fetchall()]
