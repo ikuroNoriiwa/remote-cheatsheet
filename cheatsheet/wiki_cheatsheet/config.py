@@ -31,7 +31,7 @@ def get_config_path(self):
     return DEFAULT_CONFIG_PATH
 
 def get_cheatsheet_path(self):
-    return join(DEFAULT_CONFIG_PATH, "cheatsheet")
+    return join(DEFAULT_CONFIG_PATH, "cheatsheet", self.repo_name)
 
 def get_db_config_path(self):
     return join(DEFAULT_CONFIG_PATH, "search.db")

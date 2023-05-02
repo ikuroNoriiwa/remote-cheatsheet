@@ -7,6 +7,7 @@ __version__ = "0.0.3"
 class cheatsheet: 
     def __init__(self): 
         self.url = "https://wiki.hades-cybersecurity.com/graphql"
+        self.repo_name = "hades-cybersecurity"
         self.token = self.read_token_from_config_file()
         self.headers = {"Authorization": "Bearer {}".format(self.token)}
         self.config_path = self.get_config_path()

@@ -27,7 +27,7 @@ def list():
     pages = cs.list_all_local_cheatsheets()
 
     for page in pages: 
-        table.add_row(str(page[0]), page[2], page[3], f"{page[1]}.md")
+        table.add_row(str(page[0]), page[2], page[3], f"{page[1]}")
     console = Console()
     console.print(table)
 
@@ -40,10 +40,11 @@ def read(cheatsheet_id: Annotated[int, typer.Argument(default=..., metavar="id")
     console = Console()
     if exist:
         read_single_page = cs.read_single_page_by_id(cheatsheet_id)
-        filename = f"{cs.cheatsheet_path}/{read_single_page[1]}.md"
+        filename = f"{cs.cheatsheet_path}/{read_single_page[1]}"
         with open(filename, 'r') as file:
             for line in file: 
                 if line.startswith('#'): 
                     console.print(line, end='', style="color(223)")
                 else: 
                     console.print(line, end='')
+            console.print()

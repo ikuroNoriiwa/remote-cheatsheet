@@ -59,7 +59,8 @@ def download(cheatsheet_id: int):
     cs = wiki_cheatsheet.cheatsheet()
     title, description, content, tag, hash_file, err = cs.retrieve_page_by_id(cheatsheet_id)
     cs.save_cheatsheet(title, description, content)
-    cs.insert_all(cheatsheet_id, hash_file, title, title, description, tag)
+    filename = title.replace(" ", "_") + ".md"
+    cs.insert_all(cheatsheet_id, hash_file, filename, title, description, tag)
 
 
 @app.command()
@@ -72,7 +73,8 @@ def download_all():
     for value in track(pages, description="Downloading pages ..."):
         title, description, content, tag, hash_file, err = cs.retrieve_page_by_id(value['id'])
         cs.save_cheatsheet(title, description, content)
-        cs.insert_all(value['id'], hash_file, title, title, description, tag)
+        filename = title.replace(" ", "_") + ".md"
+        cs.insert_all(value['id'], hash_file, filename, title, description, tag)
         current += 1
 
     print(f"Downloaded {current} pages on {max_page}")
