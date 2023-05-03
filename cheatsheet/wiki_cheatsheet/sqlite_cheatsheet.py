@@ -118,3 +118,15 @@ def search_term_in_description(self, term:str=None):
 
         cur.execute("SELECT cheatsheet_id FROM cheatsheets WHERE description LIKE '%{}%'".format(term))
         return [dict(row) for row in cur.fetchall()]
+    
+def get_list_tag(self): 
+ 
+    con = sqlite3.connect(self.db_config_path)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM tags")
+    return [dict(row) for row in cur.fetchall()]   
+
+def get  
+

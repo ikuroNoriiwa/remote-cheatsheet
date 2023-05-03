@@ -50,7 +50,7 @@ def read(cheatsheet_id: Annotated[int, typer.Argument(default=..., metavar="id")
             console.print()
 
 @app.command()
-def read_name(term: Annotated[List[str], typer.Argument(default=..., metavar="term")],
+def search_term(term: Annotated[List[str], typer.Argument(default=..., metavar="term")],
               title: Annotated[bool, typer.Option(default=True, help="")]=True,
               description: Annotated[bool, typer.Option(default=True, help="")]=True):
     cs = wiki_cheatsheet.cheatsheet()
@@ -81,3 +81,21 @@ def read_name(term: Annotated[List[str], typer.Argument(default=..., metavar="te
         table.add_row(str(page['cheatsheet_id']), page['title'], page['description'], f"{page['filename']}")
     console = Console()
     console.print(table)
+
+@app.command()
+def tag_list(): 
+    cs = wiki_cheatsheet.cheatsheet()
+    tags = cs.get_list_tag()
+
+    table = Table(title="Local tags list")
+    table.add_column("ID", justify="center", no_wrap=True, style="cyan")
+    table.add_column("Tag Name", justify="left", )
+
+    for tag in tags: 
+        table.add_row(str(tag['tag_id']), tag['tag'])
+    console = Console()
+    console.print(table)
+
+@app.command()
+def tags_seets(tag: Annotated[int, typer.Argument(default=..., metavar="tag")]):
+    print(tag)

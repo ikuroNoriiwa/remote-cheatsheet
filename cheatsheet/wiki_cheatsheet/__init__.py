@@ -57,6 +57,6 @@ class cheatsheet:
         list_all_local_cheatsheets,
         search_term_in_name,
         search_term_in_description,
-        
+        get_list_tag,
     )
 
